@@ -1,0 +1,38 @@
+{
+  "type": "OBJECT",
+  "properties": {
+    "scores": {
+      "type": "ARRAY",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "profile_id": { "type": "STRING" },
+          "score": { "type": "INTEGER" },
+          "verdict": { "type": "STRING", "enum": ["strong", "possible", "weak"] },
+          "why": { "type": "STRING" },
+          "evidence": {
+            "type": "ARRAY",
+            "items": {
+              "type": "OBJECT",
+              "properties": {
+                "field": {
+                  "type": "STRING",
+                  "enum": [
+                    "skills", "current_title", "years_experience", "location",
+                    "current_company", "current_company_type", "past_companies",
+                    "education", "summary"
+                  ]
+                },
+                "value": { "type": "STRING" }
+              },
+              "required": ["field", "value"]
+            }
+          },
+          "concerns": { "type": "ARRAY", "items": { "type": "STRING" } }
+        },
+        "required": ["profile_id", "score", "verdict", "why", "evidence", "concerns"]
+      }
+    }
+  },
+  "required": ["scores"]
+}

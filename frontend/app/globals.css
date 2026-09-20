@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/*
+ * Typography and colour follow Apple's system conventions, because this is a working tool
+ * that should feel like part of the operating system rather than a website about itself.
+ *
+ * One family, SF Pro, with hierarchy carried entirely by size, weight and colour — no second
+ * typeface, no decorative rules. Surfaces are white cards on Apple's warm grey, separated by
+ * soft shadow rather than a border wherever a border would add a line to count.
+ */
+@theme {
+  --color-paper: #f5f5f7;
+  --color-surface: #ffffff;
+  --color-raised: #fafafa;
+
+  --color-ink: #1d1d1f;
+  --color-muted: #6e6e73;
+  --color-faint: #86868b;
+  --color-hairline: #d2d2d7;
+
+  --color-accent: #0071e3;
+  --color-accent-hover: #0077ed;
+  --color-accent-soft: #e8f2fd;
+  --color-on-accent: #ffffff;
+
+  /* Marks a field the last refinement moved. */
+  --color-flag: #bf5af2;
+  --color-flag-soft: #f8f0fe;
+
+  --color-strong: #1d8a4e;
+  --color-possible: #b25000;
+  --color-weak: #86868b;
+
+  /* SF Pro on Apple platforms; Inter is the fallback everywhere else. */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.04);
+  --shadow-raised: 0 2px 8px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper: #000000;
+    --color-surface: #1c1c1e;
+    --color-raised: #2c2c2e;
+
+    --color-ink: #f5f5f7;
+    --color-muted: #a1a1a6;
+    --color-faint: #86868b;
+    --color-hairline: #38383a;
+
+    --color-accent: #0a84ff;
+    --color-accent-hover: #3d9bff;
+    --color-accent-soft: #0a2540;
+    --color-on-accent: #ffffff;
+
+    --color-flag: #da8fff;
+    --color-flag-soft: #2a1b33;
+
+    --color-strong: #30d158;
+    --color-possible: #ff9f0a;
+    --color-weak: #98989d;
+
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-raised: 0 8px 28px rgba(0, 0, 0, 0.5);
+  }
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
+}
+
+/* Display sizes need tighter tracking than body text, as SF Pro Display does automatically. */
+.display {
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+/* Scores, years and weights are compared down a column; they must not shift width. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* The one orchestrated motion in the app: fields the last refinement touched. */
+@keyframes mark-sweep {
+  from {
+    background-size: 0% 100%;
+  }
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+.marked {
+  background-image: linear-gradient(var(--color-flag-soft), var(--color-flag-soft));
+  background-repeat: no-repeat;
+  background-position: left center;
+  animation: mark-sweep 420ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  box-decoration-break: clone;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marked {
+    animation: none;
+    background-size: 100% 100%;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
+  outline-offset: 1px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-hairline) transparent;
+}

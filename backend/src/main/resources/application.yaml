@@ -1,0 +1,56 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: sourcing
+  profiles:
+    # `dev` additionally registers /api/dev/fault, used to demonstrate failure handling.
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+sourcing:
+  llm:
+    # Supplied as an environment variable and never committed. The application logs a loud
+    # warning at startup when it is missing, and /api/health reports it to the frontend so
+    # the first screen can show setup instructions instead of failing on first search.
+    api-key: ${GEMINI_API_KEY:}
+    model: ${GEMINI_MODEL:gemini-3.5-flash-lite}
+    base-url: ${GEMINI_BASE_URL:https://generativelanguage.googleapis.com/v1beta}
+    # A recruiter waiting longer than this would rather see an error and retry.
+    timeout: ${GEMINI_TIMEOUT:45s}
+    # One scoring call covers the whole shortlist; this caps how large that batch can get.
+    max-profiles-per-scoring-call: 20
+    # Gemini "thinking" tokens. Left unset so the provider decides, because support varies:
+    # the lite models reject this field with a 400. Set it (0 disables thinking, higher values
+    # buy scoring quality at the cost of the recruiter's wait) only on a model that accepts it.
+    thinking-budget: ${GEMINI_THINKING_BUDGET:#{null}}
+    # Retry policy. A rate limit waits for exactly as long as Gemini's 429 body asks for;
+    # a transport failure backs off exponentially. Both are capped per wait and in total, so
+    # a single call can never hold a recruiter's request open longer than the budget below.
+    max-attempts: ${GEMINI_MAX_ATTEMPTS:3}
+    max-retry-wait: ${GEMINI_MAX_RETRY_WAIT:10s}
+    retry-wait-budget: ${GEMINI_RETRY_WAIT_BUDGET:20s}
+
+    # Proactive pacing: a token bucket in front of the provider, so a quota is respected
+    # rather than discovered. The retry policy above is the safety net; this is the seat belt.
+    #
+    # Tune entirely from here or from the environment — no code change is needed to move
+    # between a free tier, a paid tier, or a different provider's ceiling:
+    #   capacity      the largest burst allowed (a new search costs 2 calls back to back)
+    #   refill-tokens tokens granted per refill-period, i.e. the sustained rate
+    #   refill-period the window refill-tokens refers to
+    #   max-wait      how long a call blocks for a token before it is shed as rate limited
+    #
+    # Defaults below are sized for a Gemini free-tier key: burst of 5, sustained 5/minute.
+    # A paid tier might be capacity 60, refill-tokens 60, refill-period 60s.
+    # Set enabled to false to turn pacing off and rely on the reactive retry alone.
+    rate-limiter:
+      enabled: ${GEMINI_RATE_LIMIT_ENABLED:true}
+      capacity: ${GEMINI_RATE_LIMIT_CAPACITY:5}
+      refill-tokens: ${GEMINI_RATE_LIMIT_REFILL_TOKENS:5}
+      refill-period: ${GEMINI_RATE_LIMIT_REFILL_PERIOD:60s}
+      max-wait: ${GEMINI_RATE_LIMIT_MAX_WAIT:20s}
+
+logging:
+  level:
+    com.flexiple.sourcing: INFO

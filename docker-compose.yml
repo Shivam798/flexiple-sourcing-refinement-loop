@@ -1,0 +1,48 @@
+# One command to run everything: `docker compose up --build`
+#
+# The API key is read from a local .env file and passed in as an environment variable. It is
+# never copied into an image and never reaches the browser — the frontend talks to the API
+# over the internal network only, through its own server-side proxy.
+
+services:
+  api:
+    build: ./backend
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:?Set GEMINI_API_KEY in .env before starting}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.5-flash-lite}
+      # `dev` additionally exposes /api/dev/fault, used to demonstrate failure handling.
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-dev}
+      # Retry policy for the model calls. A 429 waits for exactly as long as Gemini's own
+      # response asks for, up to MAX_RETRY_WAIT per wait and RETRY_WAIT_BUDGET in total.
+      # Free-tier keys rate limit readily, so this is the difference between a loop that
+      # works and one that shows an error every third refinement.
+      GEMINI_MAX_ATTEMPTS: ${GEMINI_MAX_ATTEMPTS:-3}
+      GEMINI_MAX_RETRY_WAIT: ${GEMINI_MAX_RETRY_WAIT:-10s}
+      GEMINI_RETRY_WAIT_BUDGET: ${GEMINI_RETRY_WAIT_BUDGET:-20s}
+      # Token bucket in front of the provider. Defaults suit a free-tier key (burst 5,
+      # sustained 5/min). Raise for a paid tier; set ENABLED=false to rely on retry alone.
+      GEMINI_THINKING_BUDGET: ${GEMINI_THINKING_BUDGET:-}
+      GEMINI_RATE_LIMIT_ENABLED: ${GEMINI_RATE_LIMIT_ENABLED:-true}
+      GEMINI_RATE_LIMIT_CAPACITY: ${GEMINI_RATE_LIMIT_CAPACITY:-5}
+      GEMINI_RATE_LIMIT_REFILL_TOKENS: ${GEMINI_RATE_LIMIT_REFILL_TOKENS:-5}
+      GEMINI_RATE_LIMIT_REFILL_PERIOD: ${GEMINI_RATE_LIMIT_REFILL_PERIOD:-60s}
+      GEMINI_RATE_LIMIT_MAX_WAIT: ${GEMINI_RATE_LIMIT_MAX_WAIT:-20s}
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "sh", "-c", "wget -qO- http://localhost:8080/api/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 20s
+
+  web:
+    build: ./frontend
+    environment:
+      # Reachable only inside the Compose network; the browser never uses this address.
+      API_BASE_URL: http://api:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      api:
+        condition: service_healthy

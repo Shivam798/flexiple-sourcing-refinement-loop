@@ -1,0 +1,171 @@
+{
+  "type": "OBJECT",
+  "properties": {
+    "filters": {
+      "type": "OBJECT",
+      "properties": {
+        "required_skills": {
+          "type": "ARRAY",
+          "items": {
+            "type": "STRING"
+          }
+        },
+        "preferred_skills": {
+          "type": "ARRAY",
+          "items": {
+            "type": "STRING"
+          }
+        },
+        "min_years_experience": {
+          "type": "INTEGER",
+          "nullable": true,
+          "minimum": 0,
+          "maximum": 60
+        },
+        "max_years_experience": {
+          "type": "INTEGER",
+          "nullable": true,
+          "minimum": 0,
+          "maximum": 60
+        },
+        "locations": {
+          "type": "ARRAY",
+          "items": {
+            "type": "STRING"
+          }
+        },
+        "include_remote": {
+          "type": "BOOLEAN"
+        },
+        "current_company_types": {
+          "type": "ARRAY",
+          "items": {
+            "type": "STRING",
+            "enum": [
+              "startup",
+              "scaleup",
+              "enterprise",
+              "agency"
+            ]
+          }
+        },
+        "past_company_types": {
+          "type": "ARRAY",
+          "items": {
+            "type": "STRING",
+            "enum": [
+              "startup",
+              "scaleup",
+              "enterprise",
+              "agency"
+            ]
+          }
+        },
+        "title_keywords": {
+          "type": "ARRAY",
+          "items": {
+            "type": "STRING"
+          }
+        },
+        "exclude_titles": {
+          "type": "ARRAY",
+          "items": {
+            "type": "STRING"
+          }
+        }
+      },
+      "required": [
+        "required_skills",
+        "preferred_skills",
+        "locations",
+        "include_remote",
+        "current_company_types",
+        "past_company_types",
+        "title_keywords",
+        "exclude_titles"
+      ]
+    },
+    "rubric": {
+      "type": "OBJECT",
+      "properties": {
+        "role_summary": {
+          "type": "STRING"
+        },
+        "criteria": {
+          "type": "ARRAY",
+          "items": {
+            "type": "OBJECT",
+            "properties": {
+              "name": {
+                "type": "STRING"
+              },
+              "weight": {
+                "type": "NUMBER",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "what_good_looks_like": {
+                "type": "STRING"
+              },
+              "red_flags": {
+                "type": "STRING"
+              }
+            },
+            "required": [
+              "name",
+              "weight",
+              "what_good_looks_like",
+              "red_flags"
+            ]
+          }
+        },
+        "dealbreakers": {
+          "type": "ARRAY",
+          "items": {
+            "type": "STRING"
+          }
+        }
+      },
+      "required": [
+        "role_summary",
+        "criteria",
+        "dealbreakers"
+      ]
+    },
+    "changes": {
+      "type": "ARRAY",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "target": {
+            "type": "STRING"
+          },
+          "from": {
+            "type": "STRING"
+          },
+          "to": {
+            "type": "STRING"
+          },
+          "reason": {
+            "type": "STRING"
+          }
+        },
+        "required": [
+          "target",
+          "from",
+          "to",
+          "reason"
+        ]
+      }
+    },
+    "assistant_reply": {
+      "type": "STRING"
+    }
+  },
+  "required": [
+    "filters",
+    "rubric",
+    "changes",
+    "assistant_reply"
+  ]
+}

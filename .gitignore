@@ -1,0 +1,19 @@
+# Secrets — never commit a real key
+.env
+.env.local
+
+# Java
+backend/target/
+*.class
+
+# Node
+node_modules/
+frontend/.next/
+frontend/out/
+frontend/next-env.d.ts
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+*.log
