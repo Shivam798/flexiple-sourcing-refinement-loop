@@ -55,11 +55,6 @@ public class FaultInjector {
         armed.set(null);
     }
 
-    public Mode armedMode() {
-        Armed current = armed.get();
-        return current == null ? null : current.mode();
-    }
-
     /** Consumes one armed call, disarming when the mode's budget is spent. */
     public Mode consume() {
         Armed current = armed.getAndUpdate(a -> {

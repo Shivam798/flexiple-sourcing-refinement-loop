@@ -10,10 +10,6 @@ package com.flexiple.sourcing.domain;
  */
 public record Evidence(String field, String value, boolean verified) {
 
-    public static Evidence unchecked(String field, String value) {
-        return new Evidence(field, value, false);
-    }
-
     public Evidence verified(boolean isVerified) {
         return new Evidence(field, value, isVerified);
     }

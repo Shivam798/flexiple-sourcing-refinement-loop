@@ -23,10 +23,6 @@ public record Rubric(String roleSummary, List<Criterion> criteria, List<String> 
         roleSummary = roleSummary == null ? "" : roleSummary.trim();
     }
 
-    public static Rubric empty() {
-        return new Rubric("", List.of(), List.of());
-    }
-
     /**
      * Rescales criterion weights to sum to 1.0.
      *

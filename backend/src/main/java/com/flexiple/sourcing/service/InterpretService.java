@@ -1,7 +1,6 @@
 package com.flexiple.sourcing.service;
 
 import com.flexiple.sourcing.domain.Filters;
-import com.flexiple.sourcing.domain.Rubric;
 import com.flexiple.sourcing.llm.StructuredLlmGateway;
 import com.flexiple.sourcing.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
@@ -70,9 +69,5 @@ public class InterpretService {
     /** Used by the UI to distinguish "no key configured" from "the call failed". */
     public boolean isConfigured() {
         return llm.isConfigured();
-    }
-
-    public Rubric emptyRubric() {
-        return Rubric.empty();
     }
 }
