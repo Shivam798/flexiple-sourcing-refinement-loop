@@ -1,4 +1,4 @@
-package com.flexiple.sourcing.llm;
+package com.flexiple.sourcing.exception;
 
 /** Timeout, connection failure or provider 5xx — already retried before surfacing. */
 public class LlmUnavailableException extends LlmException {

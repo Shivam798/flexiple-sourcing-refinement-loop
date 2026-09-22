@@ -1,6 +1,8 @@
 package com.flexiple.sourcing.llm;
 
 import com.flexiple.sourcing.config.GeminiProperties;
+import com.flexiple.sourcing.exception.LlmRateLimitException;
+import com.flexiple.sourcing.exception.LlmUnavailableException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

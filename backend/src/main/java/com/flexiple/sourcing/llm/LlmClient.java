@@ -1,6 +1,7 @@
 package com.flexiple.sourcing.llm;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.flexiple.sourcing.exception.LlmException;
 
 /**
  * The port through which this application talks to a language model.

@@ -1,4 +1,4 @@
-package com.flexiple.sourcing.llm;
+package com.flexiple.sourcing.exception;
 
 /**
  * Base type for every way a language model call can fail.

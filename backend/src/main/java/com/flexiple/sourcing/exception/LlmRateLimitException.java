@@ -1,4 +1,4 @@
-package com.flexiple.sourcing.llm;
+package com.flexiple.sourcing.exception;
 
 import java.time.Duration;
 

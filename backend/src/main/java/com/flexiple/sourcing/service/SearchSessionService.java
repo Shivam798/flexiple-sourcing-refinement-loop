@@ -5,6 +5,7 @@ import com.flexiple.sourcing.domain.Round;
 import com.flexiple.sourcing.domain.Rubric;
 import com.flexiple.sourcing.domain.ScoredProfile;
 import com.flexiple.sourcing.domain.SearchSession;
+import com.flexiple.sourcing.exception.SessionNotFoundException;
 import com.flexiple.sourcing.search.FilterEngine;
 import com.flexiple.sourcing.search.FilterResult;
 import com.flexiple.sourcing.store.SessionStore;

@@ -1,4 +1,4 @@
-package com.flexiple.sourcing.llm;
+package com.flexiple.sourcing.exception;
 
 /** The model replied, but not with something we can safely apply — repair already attempted. */
 public class LlmInvalidResponseException extends LlmException {

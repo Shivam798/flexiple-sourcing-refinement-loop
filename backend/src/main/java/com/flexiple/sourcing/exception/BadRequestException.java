@@ -1,4 +1,4 @@
-package com.flexiple.sourcing.web;
+package com.flexiple.sourcing.exception;
 
 /** The request cannot be acted on, with a message written for the recruiter to read. */
 public class BadRequestException extends RuntimeException {

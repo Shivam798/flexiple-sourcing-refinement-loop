@@ -1,11 +1,12 @@
 package com.flexiple.sourcing.web;
 
-import com.flexiple.sourcing.llm.LlmException;
-import com.flexiple.sourcing.llm.LlmInvalidResponseException;
-import com.flexiple.sourcing.llm.LlmNotConfiguredException;
-import com.flexiple.sourcing.llm.LlmRateLimitException;
-import com.flexiple.sourcing.llm.LlmUnavailableException;
-import com.flexiple.sourcing.service.SessionNotFoundException;
+import com.flexiple.sourcing.exception.BadRequestException;
+import com.flexiple.sourcing.exception.LlmException;
+import com.flexiple.sourcing.exception.LlmInvalidResponseException;
+import com.flexiple.sourcing.exception.LlmNotConfiguredException;
+import com.flexiple.sourcing.exception.LlmRateLimitException;
+import com.flexiple.sourcing.exception.LlmUnavailableException;
+import com.flexiple.sourcing.exception.SessionNotFoundException;
 import com.flexiple.sourcing.web.dto.ApiError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

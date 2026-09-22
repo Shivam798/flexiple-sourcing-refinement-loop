@@ -1,6 +1,7 @@
 package com.flexiple.sourcing.web;
 
 import com.flexiple.sourcing.domain.SearchSession;
+import com.flexiple.sourcing.exception.BadRequestException;
 import com.flexiple.sourcing.service.RefineService;
 import com.flexiple.sourcing.service.SearchSessionService;
 import com.flexiple.sourcing.web.dto.EditBriefRequest;

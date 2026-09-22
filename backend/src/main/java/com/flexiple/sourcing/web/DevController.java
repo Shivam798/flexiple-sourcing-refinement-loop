@@ -1,5 +1,6 @@
 package com.flexiple.sourcing.web;
 
+import com.flexiple.sourcing.exception.BadRequestException;
 import com.flexiple.sourcing.llm.FaultInjector;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.DeleteMapping;

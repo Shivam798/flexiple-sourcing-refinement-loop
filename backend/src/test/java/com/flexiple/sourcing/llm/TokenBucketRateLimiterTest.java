@@ -1,6 +1,7 @@
 package com.flexiple.sourcing.llm;
 
 import com.flexiple.sourcing.config.GeminiProperties;
+import com.flexiple.sourcing.exception.LlmRateLimitException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.flexiple.sourcing.service;
+package com.flexiple.sourcing.exception;
 
 /** The session id in the URL does not correspond to a live search. */
 public class SessionNotFoundException extends RuntimeException {

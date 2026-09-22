@@ -1,4 +1,4 @@
-package com.flexiple.sourcing.llm;
+package com.flexiple.sourcing.exception;
 
 /** No API key. A setup problem, surfaced distinctly so the UI can show setup instructions. */
 public class LlmNotConfiguredException extends LlmException {
