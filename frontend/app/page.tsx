@@ -13,7 +13,6 @@ import { ResultCard } from "@/components/ResultCard";
 import { ThinkingState, type Stage } from "@/components/ThinkingState";
 import { SearchScreen } from "@/components/SearchScreen";
 import { SetupScreen } from "@/components/SetupScreen";
-import { Wordmark } from "@/components/Wordmark";
 
 /**
  * Everything the recruiter can do, as data rather than as callbacks.

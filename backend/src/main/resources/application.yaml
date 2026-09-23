@@ -23,7 +23,7 @@ sourcing:
     # Gemini "thinking" tokens. Left unset so the provider decides, because support varies:
     # the lite models reject this field with a 400. Set it (0 disables thinking, higher values
     # buy scoring quality at the cost of the recruiter's wait) only on a model that accepts it.
-    thinking-budget: ${GEMINI_THINKING_BUDGET:#{null}}
+    thinking-budget: ${GEMINI_THINKING_BUDGET:}
     # Retry policy. A rate limit waits for exactly as long as Gemini's 429 body asks for;
     # a transport failure backs off exponentially. Both are capped per wait and in total, so
     # a single call can never hold a recruiter's request open longer than the budget below.

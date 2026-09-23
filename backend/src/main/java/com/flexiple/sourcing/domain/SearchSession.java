@@ -1,5 +1,7 @@
 package com.flexiple.sourcing.domain;
 
+import com.flexiple.sourcing.exception.SearchFrozenException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +76,7 @@ public final class SearchSession {
 
     private void requireOpen() {
         if (frozen) {
-            throw new IllegalStateException("Search is frozen and can no longer be changed");
+            throw new SearchFrozenException();
         }
     }
 }

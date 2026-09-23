@@ -16,9 +16,14 @@ export class ApiError extends Error {
     this.retryAfterSeconds = body.retryAfterSeconds;
   }
 
-  /** True when the previous results are still worth keeping on screen behind the message. */
+  /** Gates the retry button: true when re-dispatching the same action could plausibly succeed. */
   get isRecoverable() {
-    return this.code !== "SESSION_NOT_FOUND" && this.code !== "LLM_NOT_CONFIGURED";
+    // A 4xx is the caller's to fix: retrying the same request repeats the same answer.
+    return (
+      this.code !== "SESSION_NOT_FOUND" &&
+      this.code !== "LLM_NOT_CONFIGURED" &&
+      this.code !== "BAD_REQUEST"
+    );
   }
 }
 
