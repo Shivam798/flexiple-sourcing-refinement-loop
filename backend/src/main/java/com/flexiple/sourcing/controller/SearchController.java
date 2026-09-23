@@ -1,13 +1,13 @@
-package com.flexiple.sourcing.web;
+package com.flexiple.sourcing.controller;
 
+import com.flexiple.sourcing.controller.dto.EditBriefRequest;
+import com.flexiple.sourcing.controller.dto.RefineRequest;
+import com.flexiple.sourcing.controller.dto.SessionResponse;
+import com.flexiple.sourcing.controller.dto.StartSearchRequest;
 import com.flexiple.sourcing.domain.SearchSession;
 import com.flexiple.sourcing.exception.BadRequestException;
 import com.flexiple.sourcing.service.RefineService;
 import com.flexiple.sourcing.service.SearchSessionService;
-import com.flexiple.sourcing.web.dto.EditBriefRequest;
-import com.flexiple.sourcing.web.dto.RefineRequest;
-import com.flexiple.sourcing.web.dto.SessionResponse;
-import com.flexiple.sourcing.web.dto.StartSearchRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;

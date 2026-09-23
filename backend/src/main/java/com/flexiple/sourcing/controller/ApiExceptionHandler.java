@@ -1,5 +1,6 @@
-package com.flexiple.sourcing.web;
+package com.flexiple.sourcing.controller;
 
+import com.flexiple.sourcing.controller.dto.ApiError;
 import com.flexiple.sourcing.exception.BadRequestException;
 import com.flexiple.sourcing.exception.LlmException;
 import com.flexiple.sourcing.exception.LlmInvalidResponseException;
@@ -7,7 +8,6 @@ import com.flexiple.sourcing.exception.LlmNotConfiguredException;
 import com.flexiple.sourcing.exception.LlmRateLimitException;
 import com.flexiple.sourcing.exception.LlmUnavailableException;
 import com.flexiple.sourcing.exception.SessionNotFoundException;
-import com.flexiple.sourcing.web.dto.ApiError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

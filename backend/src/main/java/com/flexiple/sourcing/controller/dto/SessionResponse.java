@@ -1,4 +1,4 @@
-package com.flexiple.sourcing.web.dto;
+package com.flexiple.sourcing.controller.dto;
 
 import com.flexiple.sourcing.domain.Round;
 import com.flexiple.sourcing.domain.SearchSession;

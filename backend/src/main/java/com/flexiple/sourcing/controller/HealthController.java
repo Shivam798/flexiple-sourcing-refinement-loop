@@ -1,4 +1,4 @@
-package com.flexiple.sourcing.web;
+package com.flexiple.sourcing.controller;
 
 import com.flexiple.sourcing.llm.StructuredLlmGateway;
 import com.flexiple.sourcing.repository.ProfileRepository;

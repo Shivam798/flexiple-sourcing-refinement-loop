@@ -1,4 +1,4 @@
-package com.flexiple.sourcing.web;
+package com.flexiple.sourcing.controller;
 
 import com.flexiple.sourcing.exception.BadRequestException;
 import com.flexiple.sourcing.llm.FaultInjector;

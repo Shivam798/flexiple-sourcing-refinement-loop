@@ -1,4 +1,4 @@
-package com.flexiple.sourcing.web.dto;
+package com.flexiple.sourcing.controller.dto;
 
 import java.util.List;
 
